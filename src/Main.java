@@ -6,7 +6,7 @@ public class Main {
 
         Scanner reader = new Scanner(System.in);
         //Instancia variavel que armazena a escolha do usuário
-        int op = 2;
+        int op = 3;
 
         //Cria fila com 4000 elementos
         FilaDePrioridade fila = new FilaDePrioridade();
@@ -35,12 +35,12 @@ public class Main {
 //        elementos.add(new Elemento(1,16.0));
 
         elementos.add(new Elemento(1,100.0));
-        elementos.add(new Elemento(1,50.0));
         elementos.add(new Elemento(1,20.0));
+        elementos.add(new Elemento(1,30.0));
         elementos.add(new Elemento(1,1.0));
-        elementos.add(new Elemento(1,3.0));
-        elementos.add(new Elemento(1,10.0));
         elementos.add(new Elemento(1,5.0));
+        elementos.add(new Elemento(1,10.0));
+        elementos.add(new Elemento(1,15.0));
 
         fila.heap = elementos;
 
@@ -71,6 +71,7 @@ public class Main {
 
             case 3:
                 System.out.println("Você escolheu Heap-Insert");
+                fila.HeapInsert(elementos, new Elemento(2, 200.0));
                 break;
 
             case 4:
@@ -78,8 +79,7 @@ public class Main {
                 break;
 
             case 5:
-                System.out.println("Você escolheu MaxHeapify");
-                fila.MaxHeapify(elementos,0);
+                System.out.println("Você escolheu HeapIncreaseKey");
                 break;
 
             default:
