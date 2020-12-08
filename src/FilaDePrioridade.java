@@ -15,13 +15,16 @@ public class FilaDePrioridade {
         this.m = 0;
     }
 
-    public Elemento HeapMax(Elemento[] fila, int qtd){
+    public Elemento HeapMax(ArrayList<Elemento> elementos, int qtd){
 
         //Método para devolver o elemento que possui a maior prioridade
         //do vetor A com qtd elementos. Se a fila estiver vazia
         //deve retornar -1 -1 0
+        if (elementos.isEmpty()){
+            return new Elemento(-1,-1.0);
+        }
 
-        return fila[0];
+        return elementos.get(0);
     }
 
     public Elemento HeapExtractMax(ArrayList<Elemento> elementos, int qtd){
@@ -38,19 +41,21 @@ public class FilaDePrioridade {
         return removido;
     }
 
-    public void HeapInsert(ArrayList<Elemento> elementos, Elemento elemento){
+    public String  HeapInsert(ArrayList<Elemento> elementos, Elemento elemento){
         //Insere o elemento no vetor fila que contem qtd elementos
         //Se a insercao for bem sucedidade, retorna T
         //do contrário retorna F
         elementos.add(elemento);
         m = elementos.size();
-        HeapIncreaseKey(elementos, m - 1, elemento);
-        System.out.println(elementos.toString());
+        return HeapIncreaseKey(elementos, m - 1, elemento);
     }
 
-    public void HeapPrint(Elemento[] fila, int qtd){
-
+    public void HeapPrint(ArrayList<Elemento> elementos){
         //Imprime o vetor fila que contém m elementos
+        for (int i = 0; i < elementos.size(); i++) {
+            Elemento elemento = elementos.get(i);
+            System.out.println("id: "+ elemento.id + " prior: " + elemento.priority);
+        }
     }
 
     //MÉTODOS AUXILIARES
@@ -59,7 +64,7 @@ public class FilaDePrioridade {
         //Recebe o vetor fila e o indice tal que
         //as arvores com raizes nos filhos esq e dir
         //do nó i são max-heaps. Utilizado como auxiliar
-        //do metodo HeapExractMax
+        //do metodo HeapExtractMax
         int size = elementos.size();
         int largest = i;
         int l = 2 * i + 1;
@@ -78,13 +83,14 @@ public class FilaDePrioridade {
         }
     }
 
-    public void HeapIncreaseKey(ArrayList<Elemento> fila, int i, Elemento elemento){
+    public String HeapIncreaseKey(ArrayList<Elemento> fila, int i, Elemento elemento){
 
         //Aumenta o valor da prioridade para prioridade do elemento
         //que está na posição indice da fila. Utilizado como auxiliar
         //do HeapInsert
         if(elemento.priority < fila.get(i).priority){
             System.out.println("a nova chave é menor que a chave atual");
+            return "F";
         }
 
         fila.set(i, elemento);
@@ -97,7 +103,8 @@ public class FilaDePrioridade {
             parent = (i + 1) / 2 - 1;
         }
 
-        System.out.println(fila.toString());
+        return "T";
+
     }
 
     //is heap empty?
